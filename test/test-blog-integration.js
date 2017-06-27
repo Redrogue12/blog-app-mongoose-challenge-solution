@@ -39,3 +39,27 @@ function tearDownDb() {
   console.warn('Deleting database');
   return mongoose.connection.dropDatabase();
 }
+
+describe('Restaurants API resource', function() {
+
+  // Each function returns a Promise
+
+  before(function() {
+    return runServer(TEST_DATABASE_URL);
+  });
+
+  beforeEach(function() {
+    return seedBlogData();
+  });
+
+  afterEach(function() {
+    return tearDownDb();
+  });
+
+  after(function() {
+    return closeServer();
+  });
+
+  // 
+
+});
