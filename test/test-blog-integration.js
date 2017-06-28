@@ -60,6 +60,28 @@ describe('Restaurants API resource', function() {
     return closeServer();
   });
 
-  // 
+  // nested describe blocks
+  describe('GET endpoing', function() {
+
+    it('should return all existing blog posts', function() {
+      // 1. Prove all posts are returned by GET request
+      // 2. Prove response has the right status and data type
+      // 3. Prove the number of posts in response is equal to number in db
+      // we declare a res variable so we can pass the value of the response to
+      // the next function
+      let res;
+      return chai.request(app)
+      .get('/posts')
+      .then(function(_res) {
+        res = _res;
+        res.should.have.status(200);
+        res.body.BlogPost.should.have.length.of.at.least(1);
+        return BlogPost.count();
+      })
+      .then(function(count) {
+        res.body.BlogPost.should.have.length.of(count);
+      })
+    });
+  });
 
 });
