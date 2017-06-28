@@ -8,10 +8,10 @@
     "test": "mocha"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.17.2",
     "chai": "^4.0.2",
     "chai-http": "^3.0.0",
-    "express": "^4.12.4",
+    "express": "^4.15.3",
     "faker": "^4.1.0",
     "mocha": "^3.4.2",
     "mongoose": "^4.11.0",
