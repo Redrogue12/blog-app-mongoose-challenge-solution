@@ -76,11 +76,11 @@ describe('Restaurants API resource', function() {
       .then(function(_res) {
         res = _res;
         res.should.have.status(200);
-        res.body.BlogPost.should.have.length.of.at.least(1);
-        return BlogPost.count();
+        res.body.posts.should.have.length.of.at.least(1);
+        return posts.count();
       })
       .then(function(count) {
-        res.body.BlogPost.should.have.length.of(count);
+        res.body.posts.should.have.length.of(count);
       })
     });
   });
