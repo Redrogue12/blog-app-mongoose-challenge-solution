@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: QZd3erxyW/V2YP8EtLNqtbz6QkuKT7QQ1z9/2M5b0bvf/KJX/+SD5oJ1KPTDyL74hVBj4ZWkhVG893YjD8sxht0QD25KrLQMT1/QbIkLy2/CND7v3xFCJOCTsintWxiT5eevHUOkSBd/Z+6cXJkCqzxn+LTTgoHUloYsnnV3UrGLbXQppB/VOL+qU4KAnLOLEqIHAtSb0S+8pVrwD0gsuMdwOTK3AiTg6NlPV/Y3rKMlXyhy+nmwmZSFT5oda/t7GPvOQl+tFZjE1h9F4niIht//OvP0MTSsKBnLninP8MqWEEJPI5PPQc61U7tWbMCHzdyd6IYbJuCq1ogDMnLWKtAOHZCp8vGCj8JHK1V/mYnnAYvqL7bhiFsbLHnNfxghObH+QJ6c6y/GN3neeXrVDs3uEGfNQnN4WBumE4szxCqhtO9zi6fOL3hioojI3ZwLDrOySCQqu1btBVcGuoLa8A9LLic5y6MVmMApMB9QhxIyN2Oqr+WyzdSm94fk6Rmih1HUrVDo/impuTWp8exRKxfPHCXPjevyPWe2cpoN9rAD8oT/r1J5ssWrgOuADxp7YJUr6SnJZgmm6gYkNW/CGo1P2tnz4jzDtoU5HJoLt+AjbkpwhfZ/vx9hyFA2aqEXPG3t6d6mKgdDyZgnrbcvf3RKM5XfYe+dddOVRUtXtOE=
+  app: lit-reaches-51990
+  on:
+    repo: Redrogue12/blog-app-mongoose-challenge-solution
