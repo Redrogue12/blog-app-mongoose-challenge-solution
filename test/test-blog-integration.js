@@ -31,8 +31,13 @@ function seedBlogData() {
 
 // Delete database
 function tearDownDb() {
-  console.warn('Deleting database');
-  return mongoose.connection.dropDatabase();
+
+  return new Promise((resolve, reject) => {
+    console.warn('Deleting database');
+    mongoose.connection.dropDatabase()
+      .then(result => resolve(result))
+      .catch(err => reject(err))
+  });
 }
 
 describe('Blog API resource', function() {
