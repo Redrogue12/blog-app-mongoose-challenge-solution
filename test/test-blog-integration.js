@@ -11,18 +11,6 @@ const {TEST_DATABASE_URL} = require('../config');
 
 chai.use(chaiHttp);
 
-// Fill database
-function seedBlogData() {
-  console.info('Seeding blog data');
-  const seedData = [];
-
-  for (let i=1; i<=10; i++) {
-    seedData.push(generateBlogData());
-  }
-  // this will return a Promise
-  return BlogPost.insertMany(seedData);
-}
-
 // Generate an object representing a blog post
 function generateBlogData() {
   return {
@@ -35,13 +23,25 @@ function generateBlogData() {
   }
 }
 
+// Fill database
+function seedBlogData() {
+  console.info('Seeding blog data');
+  const seedData = [];
+
+  for (let i=1; i<=10; i++) {
+    seedData.push(generateBlogData());
+  }
+  // this will return a Promise
+  return BlogPost.insertMany(seedData);
+}
+
 // Delete database
 function tearDownDb() {
   console.warn('Deleting database');
   return mongoose.connection.dropDatabase();
 }
 
-describe('Restaurants API resource', function() {
+describe('Blog API resource', function() {
 
   // Each function returns a Promise
 
@@ -62,7 +62,7 @@ describe('Restaurants API resource', function() {
   });
 
   // nested describe blocks
-  describe('GET endpoing', function() {
+  describe('GET endpoint', function() {
 
     it('should return all existing blog posts', function() {
       // 1. Prove all posts are returned by GET request
@@ -76,13 +76,35 @@ describe('Restaurants API resource', function() {
       .then(function(_res) {
         res = _res;
         res.should.have.status(200);
-        res.body.posts.should.have.length.of.at.least(1);
-        return posts.count();
+        res.body.should.have.length.of.at.least(1);
+        return BlogPost.count();
       })
       .then(function(count) {
-        res.body.posts.should.have.length.of(count);
+        res.body.should.have.length.of(count);
       })
     });
   });
+
+  it('should return posts with right fields', function() {
+    //Get back all posts and ensure they have expected keys
+
+    let resPost;
+    return chai.request(app)
+      .get('/posts')
+      .then(function(res) {
+
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('array');
+        res.body.should.have.length.of.at.least(1);
+
+        res.body.forEach(function(post) {
+          post.should.be.a('object');
+          post.should.include.keys('id', 'title', 'content', 'author', 'created');
+        });
+      })
+  })
+
+
 
 });
