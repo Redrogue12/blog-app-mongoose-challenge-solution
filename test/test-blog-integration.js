@@ -12,26 +12,20 @@ const {TEST_DATABASE_URL} = require('../config');
 chai.use(chaiHttp);
 
 // Generate an object representing a blog post
-function generateBlogData() {
-  return {
-    author: {
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName()
-    },
-    title: faker.lorem.sentence(),
-    content: faker.lorem.paragraph()
-  }
-}
-
-// Fill database
 function seedBlogData() {
-  console.info('Seeding blog data');
+  console.info('seeding blog post data');
   const seedData = [];
-
   for (let i=1; i<=10; i++) {
-    seedData.push(generateBlogData());
+    seedData.push({
+      author: {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName()
+      },
+      title: faker.lorem.sentence(),
+      content: faker.lorem.text()
+    });
   }
-  // this will return a Promise
+  // this will return a promise
   return BlogPost.insertMany(seedData);
 }
 
